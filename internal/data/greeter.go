@@ -21,7 +21,17 @@ func NewGreeterRepo(data *Data, logger log.Logger) biz.GreeterRepo {
 	}
 }
 
+// Save 方法返回输入的参数。但有以下特殊规则：
+//
+//   - 输入 "404" 返回 ErrUserNotFound。
+//   - 输入 "" 或 "400" 返回 ErrorGreeterUnspecified
 func (r *greeterRepo) Save(ctx context.Context, g *biz.Greeter) (*biz.Greeter, error) {
+	switch g.Hello {
+	case "404":
+		return nil, biz.ErrUserNotFound
+	case "", "400":
+		return nil, biz.ErrorGreeterUnspecified
+	}
 	return g, nil
 }
 

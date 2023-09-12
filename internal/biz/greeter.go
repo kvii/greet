@@ -12,6 +12,8 @@ import (
 var (
 	// ErrUserNotFound is user not found.
 	ErrUserNotFound = errors.NotFound(v1.ErrorReason_USER_NOT_FOUND.String(), "user not found")
+	// ErrorGreeterUnspecified is greeter unspecified.
+	ErrorGreeterUnspecified = errors.BadRequest(v1.ErrorReason_GREETER_UNSPECIFIED.String(), "greeter unspecified")
 )
 
 // Greeter is a Greeter model.
@@ -21,6 +23,10 @@ type Greeter struct {
 
 // GreeterRepo is a Greater repo.
 type GreeterRepo interface {
+	// Save 方法返回输入的参数。但有以下特殊规则：
+	//
+	//	* 输入 "404" 返回 ErrUserNotFound。
+	//	* 输入 "" 或 "400" 返回 ErrorGreeterUnspecified
 	Save(context.Context, *Greeter) (*Greeter, error)
 	Update(context.Context, *Greeter) (*Greeter, error)
 	FindByID(context.Context, int64) (*Greeter, error)
