@@ -9,22 +9,26 @@ option java_multiple_files = true;
 option java_package = "dev.kratos.api.helloworld.v1";
 option java_outer_classname = "HelloworldProtoV1";
 
-// The greeting service definition.
+// Greeter 服务是打招呼服务
 service Greeter {
-  // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {
+  // SayHello 方法进行一个招呼的打。
+  // 当用户名为 "404" 时应报错。错误原因是 "USER_NOT_FOUND"。
+  // 当用户名为 "400" 时应报错。错误原因是 "GREETER_UNSPECIFIED"。
+  rpc SayHello(HelloRequest) returns (HelloReply) {
     option (google.api.http) = {
-      get: "/helloworld/{name}"
+      get : "/helloworld/{name}"
     };
   }
 }
 
-// The request message containing the user's name.
+// HelloRequest 类型定义了打招呼参数类型
 message HelloRequest {
+  // 用户名
   string name = 1;
 }
 
-// The response message containing the greetings
+// HelloReply 类型是打招呼的返回信息类型
 message HelloReply {
+  // 响应信息
   string message = 1;
 }

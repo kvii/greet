@@ -26,7 +26,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GreeterClient interface {
-	// Sends a greeting
+	// SayHello 方法进行一个招呼的打。
+	// 当用户名为 "404" 时应报错。错误原因是 "USER_NOT_FOUND"。
+	// 当用户名为 "400" 时应报错。错误原因是 "GREETER_UNSPECIFIED"。
 	SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error)
 }
 
@@ -51,7 +53,9 @@ func (c *greeterClient) SayHello(ctx context.Context, in *HelloRequest, opts ...
 // All implementations must embed UnimplementedGreeterServer
 // for forward compatibility
 type GreeterServer interface {
-	// Sends a greeting
+	// SayHello 方法进行一个招呼的打。
+	// 当用户名为 "404" 时应报错。错误原因是 "USER_NOT_FOUND"。
+	// 当用户名为 "400" 时应报错。错误原因是 "GREETER_UNSPECIFIED"。
 	SayHello(context.Context, *HelloRequest) (*HelloReply, error)
 	mustEmbedUnimplementedGreeterServer()
 }

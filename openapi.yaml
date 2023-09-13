@@ -4,18 +4,22 @@
 openapi: 3.0.3
 info:
     title: Greeter API
-    description: The greeting service definition.
+    description: Greeter 服务是打招呼服务
     version: 0.0.1
 paths:
     /helloworld/{name}:
         get:
             tags:
                 - Greeter
-            description: Sends a greeting
+            description: |-
+                SayHello 方法进行一个招呼的打。
+                 当用户名为 "404" 时应报错。错误原因是 "USER_NOT_FOUND"。
+                 当用户名为 "400" 时应报错。错误原因是 "GREETER_UNSPECIFIED"。
             operationId: Greeter_SayHello
             parameters:
                 - name: name
                   in: path
+                  description: 用户名
                   required: true
                   schema:
                     type: string
@@ -33,6 +37,7 @@ components:
             properties:
                 message:
                     type: string
-            description: The response message containing the greetings
+                    description: 响应信息
+            description: HelloReply 类型是打招呼的返回信息类型
 tags:
     - name: Greeter

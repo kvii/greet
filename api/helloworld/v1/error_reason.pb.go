@@ -20,11 +20,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// 错误原因
 type ErrorReason int32
 
 const (
+	// 用户名未指定
 	ErrorReason_GREETER_UNSPECIFIED ErrorReason = 0
-	ErrorReason_USER_NOT_FOUND      ErrorReason = 1
+	// 用户不存在
+	ErrorReason_USER_NOT_FOUND ErrorReason = 1
 )
 
 // Enum value maps for ErrorReason.

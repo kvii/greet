@@ -19,7 +19,9 @@ func NewGreeterService(uc *biz.GreeterUsecase) *GreeterService {
 	return &GreeterService{uc: uc}
 }
 
-// SayHello implements helloworld.GreeterServer.
+// SayHello 方法进行一个招呼的打。
+// 当用户名为 "404" 时应报错。错误原因是 "USER_NOT_FOUND"。
+// 当用户名为 "400" 时应报错。错误原因是 "GREETER_UNSPECIFIED"。
 func (s *GreeterService) SayHello(ctx context.Context, in *v1.HelloRequest) (*v1.HelloReply, error) {
 	g, err := s.uc.CreateGreeter(ctx, &biz.Greeter{Hello: in.Name})
 	if err != nil {

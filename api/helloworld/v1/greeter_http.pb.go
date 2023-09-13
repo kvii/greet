@@ -22,7 +22,9 @@ const _ = http.SupportPackageIsVersion1
 const OperationGreeterSayHello = "/helloworld.v1.Greeter/SayHello"
 
 type GreeterHTTPServer interface {
-	// SayHello Sends a greeting
+	// SayHello SayHello 方法进行一个招呼的打。
+	// 当用户名为 "404" 时应报错。错误原因是 "USER_NOT_FOUND"。
+	// 当用户名为 "400" 时应报错。错误原因是 "GREETER_UNSPECIFIED"。
 	SayHello(context.Context, *HelloRequest) (*HelloReply, error)
 }
 
